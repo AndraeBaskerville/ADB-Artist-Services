@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A.D.B Services & Pricing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="A.D.B — Independent Artist Pricing for Songwriting, Vocal Recording, and Creative Services.">
+  <style>
+    body {
+      background-color: #0a0a0a;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      padding: 40px;
+      text-align: center;
+      transition: background-color 0.5s ease, color 0.5s ease;
+      background-image: linear-gradient(to bottom, #0a0a0a, #1a1a1a);
+      background-attachment: fixed;
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #fff;
+      text-shadow: 0 0 10px #ff00cc;
+    }
+
+    h2 {
+      animation: slideIn 1s ease-out forwards;
+      opacity: 0;
+    }
+
+    .note {
+      font-size: 1em;
+      color: #ccc;
+      margin-bottom: 40px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 40px;
+      animation: slideIn 1.2s ease-out forwards;
+      opacity: 0;
+    }
+
+    th, td {
+      padding: 12px;
+      border: 1px solid #444;
+      text-align: left;
+      color: #f0f0f0;
+    }
+
+    tr:hover {
+      background-color: #1a1a1a;
+      box-shadow: 0 0 10px #ff00cc;
+      transition: box-shadow 0.3s ease;
+    }
+
+    th:hover {
+      background-color: #2a2a2a;
+      color: #ff00cc;
+    }
+
+    td:nth-child(3):hover {
+      color: #ff00cc;
+      font-weight: bold;
+    }
+
+    .soundcloud-player,
+    .bandcamp-player {
+      margin-bottom: 40px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .soundcloud-player:hover iframe,
+    .bandcamp-player:hover iframe {
+      transform: scale(1.02);
+      box-shadow: 0 0 20px #ff5500;
+    }
+
+    .soundcloud-credit {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 10px;
+    }
+
+    .soundcloud-credit a {
+      color: #ff5500;
+      text-decoration: none;
+      margin: 0 5px;
+    }
+
+    .bandcamp-player {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .lyric-card {
+      margin: 60px auto;
+      max-width: 600px;
+      text-align: center;
+    }
+
+    .lyric-card img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #f0f0f0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      animation: fadeIn 2s ease-in forwards;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .lyric-card img:hover {
+      box-shadow: 0 0 30px #ff00cc;
+    }
+
+    .lyric {
+      font-style: italic;
+      margin-top: 15px;
+      color: #ccc;
+      animation: flicker 3s infinite;
+    }
+
+    .footer {
+      font-size: 0.9em;
+      color: #888;
+      margin-top: 5px;
+    }
+
+    .legacy-visual {
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .legacy-visual img {
+      max-width: 100%;
+      height: auto;
+      border: 2px solid #f0f0f0;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.5s ease, transform 1.5s ease;
+    }
+
+    .legacy-visual img.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .request-button {
+      background-color: #ff00cc;
+      color: #fff;
+      text-decoration: none;
+      display: inline-block;
+      padding: 15px 30px;
+      font-size: 1.2em;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      cursor: pointer;
+      box-shadow: 0 0 15px #ff00cc;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin: 40px 0;
+      animation: pulse 2s infinite;
+    }
+
+    .request-button:hover {
+      background-color: #e600b3;
+      transform: scale(1.05);
+    }
+
+    .legacy-badge {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #111;
+      color: #ff00cc;
+      padding: 10px 20px;
+      border-radius: 8px;
+      font-size: 0.9em;
+      box-shadow: 0 0 10px #ff00cc;
+      z-index: 999;
+      transition: transform 0.3s ease;
+    }
+
+    .legacy-badge:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #ff00cc;
+    }
+
+    .lyric-overlay {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1em;
+      color: #ccc;
+      font-style: italic;
+      animation: fadeLyric 6s infinite;
+      z-index: 998;
+    }
+
+    .dark-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background-color: #222;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    @keyframes fadeIn { to { opacity: 1; } }
+    @keyframes slideIn {
+      from { transform: translateY(30px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes pulse {
+      0% { box-shadow: 0 0 15px #ff00cc; }
+      50% { box-shadow: 0 0 25px #ff00cc; }
+      100% { box-shadow: 0 0 15px #ff00cc; }
+    }
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+      75% { opacity: 0.8; }
+    }
+    @keyframes fadeLyric {
+      0%, 100% { opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <button class="dark-toggle" onclick="toggleDarkMode()">Toggle Mode</button>
+  <div class="lyric-overlay">“Truth lives in the verse. Legacy lives in the echo.”</div>
+  <div class="legacy-badge">A.D.B — Legacy in Motion | Huntsville, AL</div>  <!-- SoundCloud Embed -->
+  <div class="soundcloud-player">
+    <iframe width="100%" height="166" scrolling="no" frameborder="no" allow="autoplay"
+      src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/2153301675&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true">
+    </iframe>
+    <div class="soundcloud-credit">
+      <a href="https://soundcloud.com/curtis-mayfield-3" target="_blank">A.D.B - Baskerville Music Inc.</a> ·
+      <a href="https://soundcloud.com/curtis-mayfield-3/finer-things" target="_blank">Finer Things Ft. Translee & King Kuma</a>
+    </div>
+  </div>
+
+  <!-- Bandcamp Embed -->
+  <div class="bandcamp-player">
+    <iframe style="border: 0; width: 350px; height: 350px;"
+      src="https://bandcamp.com/EmbeddedPlayer/album=4050506119/size=large/bgcol=ffffff/linkcol=0687f5/minimal=true/transparent=true/"
+      seamless>
+      <a href="https://those-feels-from-the-ville-adb.bandcamp.com/album/those-feels-from-the-ville">Those Feels from The Ville by A.D.B</a>
+    </iframe>
+  </div>
+
+  <!-- Lyric Card -->
+  <div class="lyric-card">
+    <img src="adb-studio.jpeg" alt="A.D.B in studio — legacy in motion">
+    <div class="lyric">A.D.B – Huntsville, Alabama</div>
+    <div class="footer">A.D.B – Huntsville, Alabama</div>
+  </div>
+
+  <header><h1>A.D.B — Services & Pricing</h1></header>
+  <p class="note">All prices are for non-exclusive use. Full rights = 2× listed price. Custom contracts available.</p>  <h2>✍️ Songwriting</h2>
+  <table>
+    <tr><th>Service</th><th>Description</th><th>Price</th></tr>
+    <tr><td>Full Song (Lyrics Only)</td><td>Custom verses, hook, bridge</td><td>$300–$500</td></tr>
+    <tr><td>Hook Only</td><td>Melodic or rap chorus</td><td>$150–$250</td></tr>
+    <tr><td>Verse Only</td><td>16-bar rap or 8-bar sung verse</td><td>$100–$200</td></tr>
+    <tr><td>Concept Development</td><td>Theme, structure, emotional tone</td><td>$75–$150</td></tr>
+    <tr><td>Lyric Rewrites</td><td>Polish or revise existing lyrics</td><td>$75–$125</td></tr>
+  </table>
+
+  <h2>🎙️ Vocal Recording</h2>
+  <table>
+    <tr><th>Service</th><th>Description</th><th>Price</th></tr>
+    <tr><td>Full Vocal Performance</td><td>Lead vocals for full track</td><td>$400–$700</td></tr>
+    <tr><td>Hook Recording</td><td>Sung or rapped chorus</td><td>$200–$350</td></tr>
+    <tr><td>Verse Recording</td><td>One 16-bar rap or 8-bar sung verse</td><td>$150–$250</td></tr>
+    <tr><td>Ad-libs & Harmonies</td><td>Layered vocals for texture</td><td>$100–$200</td></tr>
+    <tr><td>Reference Vocals</td><td>Demo vocals for another artist</td><td>$125–$225</td></tr>
+    <tr><td>Vocal Editing</td><td>Comping, tuning, timing</td><td>$100–$175</td></tr>
+  </table>
+
+  <h2>🧠 Creative Consulting</h2>
+  <table>
+    <tr><th>Service</th><th>Description</th><th>Price</th></tr>
+    <tr><td>Brand & Story Audit</td><td>Review of music, visuals, messaging</td><td>$150–$300</td></tr>
+    <tr><td>Store Strategy Session</td><td>Ideas for merch, lyric cards, fan tools</td><td>$100–$200</td></tr>
+    <tr><td>Legacy Planning</td><td>Long-term archive & impact strategy</td><td>$200–$400</td></tr>
+  </table><!-- Legacy Visual -->
+<div class="legacy-visual">
+  <img src="https://i.imgur.com/cfo6XDm.jpeg" alt="Those Feels From The Ville — Neon Wall Legacy">
+</div>
+
+<!-- Request Services Button -->
+<a href="mailto:andraebaskerville@gmail.com?subject=Request%20Services" class="request-button">
+  Request Services
+</a>
+
+<!-- Scripts -->
+<script>
+  // Scroll-triggered fade-in for legacy image
+  const legacyImg = document.querySelector('.legacy-visual img');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        legacyImg.classList.add('visible');
+        observer.unobserve(legacyImg);
+      }
+    });
+  }, { threshold: 0.5 });
+  observer.observe(legacyImg);
+
+  // Dark mode toggle
+  function toggleDarkMode() {
+    const body = document.body;
+    const isDark = getComputedStyle(body).backgroundColor === 'rgb(10, 10, 10)';
+    if (isDark) {
+      body.style.backgroundColor = '#ffffff';
+      body.style.color = '#111111';
+    } else {
+      body.style.backgroundColor = '#0a0a0a';
+      body.style.color = '#f0f0f0';
+    }
+  }
+</script>
+
+</body>
+</html>
